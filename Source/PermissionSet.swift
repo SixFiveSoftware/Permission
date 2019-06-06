@@ -23,139 +23,139 @@
 //
 
 open class PermissionSet {
-    
-    /// The permissions in the set.
-    open let permissions: Set<Permission>
-    
-    /// The delegate of the permission set.
-    open weak var delegate: PermissionSetDelegate?
-    
-    /// The permission set status
-    open var status: PermissionStatus {
-        let statuses = permissions.map({ $0.status })
-        
-        for status in statuses where status == .denied {
-            return .denied
-        }
-        
-        for status in statuses where status == .disabled {
-            return .disabled
-        }
-        
-        for status in statuses where status == .notDetermined {
-            return .notDetermined
-        }
-        
-        return .authorized
+
+  /// The permissions in the set.
+  public let permissions: Set<Permission>
+
+  /// The delegate of the permission set.
+  open weak var delegate: PermissionSetDelegate?
+
+  /// The permission set status
+  open var status: PermissionStatus {
+    let statuses = permissions.map({ $0.status })
+
+    for status in statuses where status == .denied {
+      return .denied
     }
-    
-    /**
-     Creates and returns a new permission set containing the specified buttons.
-     
-     - parameter buttons: The buttons contained by the set.
-     
-     - returns: A newly created set.
-     */
-    public convenience init(_ buttons: PermissionButton...) {
-        self.init(buttons: buttons)
+
+    for status in statuses where status == .disabled {
+      return .disabled
     }
-    
-    /**
-     Creates and returns a new permission set containing the specified buttons.
-     
-     - parameter buttons: The buttons contained by the set.
-     
-     - returns: A newly created set.
-     */
-    public convenience init(_ buttons: [PermissionButton]) {
-        self.init(buttons: buttons)
+
+    for status in statuses where status == .notDetermined {
+      return .notDetermined
     }
-    
-    /**
-     Creates and returns a new permission set containing the specified buttons.
-     
-     - parameter permissions: The permissions contained by the set.
-     
-     - returns: A newly created set.
-     */
-    public convenience init(_ permissions: Permission...) {
-        self.init(permissions: permissions)
-    }
-    
-    /**
-     Creates and returns a new permission set containing the specified buttons.
-     
-     - parameter permissions: The permissions contained by the set.
-     
-     - returns: A newly created set.
-     */
-    public convenience init(_ permissions: [Permission]) {
-        self.init(permissions: permissions)
-    }
-    
-    fileprivate convenience init(buttons: [PermissionButton]) {
-        let permissions = buttons.map({ $0.permission })
-        
-        self.init(permissions: permissions)
-    }
-    
-    fileprivate init(permissions: [Permission]) {
-        self.permissions = Set(permissions)
-        self.permissions.forEach { $0.permissionSets.append(self) }
-    }
-    
-    internal func willRequestPermission(_ permission: Permission) {
-        delegate?.permissionSet(self, willRequestPermission: permission)
-    }
-    
-    internal func didRequestPermission(_ permission: Permission) {
-        delegate?.permissionSet(self, didRequestPermission: permission)
-    }
+
+    return .authorized
+  }
+
+  /**
+   Creates and returns a new permission set containing the specified buttons.
+
+   - parameter buttons: The buttons contained by the set.
+
+   - returns: A newly created set.
+   */
+  public convenience init(_ buttons: PermissionButton...) {
+    self.init(buttons: buttons)
+  }
+
+  /**
+   Creates and returns a new permission set containing the specified buttons.
+
+   - parameter buttons: The buttons contained by the set.
+
+   - returns: A newly created set.
+   */
+  public convenience init(_ buttons: [PermissionButton]) {
+    self.init(buttons: buttons)
+  }
+
+  /**
+   Creates and returns a new permission set containing the specified buttons.
+
+   - parameter permissions: The permissions contained by the set.
+
+   - returns: A newly created set.
+   */
+  public convenience init(_ permissions: Permission...) {
+    self.init(permissions: permissions)
+  }
+
+  /**
+   Creates and returns a new permission set containing the specified buttons.
+
+   - parameter permissions: The permissions contained by the set.
+
+   - returns: A newly created set.
+   */
+  public convenience init(_ permissions: [Permission]) {
+    self.init(permissions: permissions)
+  }
+
+  fileprivate convenience init(buttons: [PermissionButton]) {
+    let permissions = buttons.map({ $0.permission })
+
+    self.init(permissions: permissions)
+  }
+
+  fileprivate init(permissions: [Permission]) {
+    self.permissions = Set(permissions)
+    self.permissions.forEach { $0.permissionSets.append(self) }
+  }
+
+  internal func willRequestPermission(_ permission: Permission) {
+    delegate?.permissionSet(self, willRequestPermission: permission)
+  }
+
+  internal func didRequestPermission(_ permission: Permission) {
+    delegate?.permissionSet(self, didRequestPermission: permission)
+  }
 }
 
 extension PermissionSet: CustomStringConvertible {
-    /// The textual representation of self.
-    public var description: String {
-        return [
-            "\(status): [",
-            permissions.map{ "\t\($0)" }.joined(separator: ",\n"),
-            "]"
-        ].joined(separator: "\n")
-    }
+  /// The textual representation of self.
+  public var description: String {
+    return [
+      "\(status): [",
+      permissions.map{ "\t\($0)" }.joined(separator: ",\n"),
+      "]"
+      ].joined(separator: "\n")
+  }
 }
 
 public protocol PermissionSetDelegate: class {
-    /**
-     Tells the delegate that the specified permission has been requested.
-     
-     - parameter permissionSet: The permission set containing the requested permission.
-     - parameter permission:    The requested permission.
-     */
-    func permissionSet(_ permissionSet: PermissionSet, didRequestPermission permission: Permission)
-    
-    /**
-     Tells the delegate that the specified permission will be requested.
-     
-     - parameter permissionSet: The permission set containing the requested permission.
-     - parameter permission:    The requested permission.
-     */
-    func permissionSet(_ permissionSet: PermissionSet, willRequestPermission permission: Permission)
+  /**
+   Tells the delegate that the specified permission has been requested.
+
+   - parameter permissionSet: The permission set containing the requested permission.
+   - parameter permission:    The requested permission.
+   */
+  func permissionSet(_ permissionSet: PermissionSet, didRequestPermission permission: Permission)
+
+  /**
+   Tells the delegate that the specified permission will be requested.
+   
+   - parameter permissionSet: The permission set containing the requested permission.
+   - parameter permission:    The requested permission.
+   */
+  func permissionSet(_ permissionSet: PermissionSet, willRequestPermission permission: Permission)
 }
 
 public extension PermissionSetDelegate {
-    /**
-     Tells the delegate that the specified permission has been requested.
-     
-     - parameter permissionSet: The permission set containing the requested permission.
-     - parameter permission:    The requested permission.
-     */
-    func permissionSet(_ permissionSet: PermissionSet, didRequestPermission permission: Permission) {}
-    
-    /**
-     Tells the delegate that the specified permission will be requested.
-     
-     - parameter permissionSet: The permission set containing the requested permission.
-     - parameter permission:    The requested permission.
-     */
-    func permissionSet(_ permissionSet: PermissionSet, willRequestPermission permission: Permission) {}
+  /**
+   Tells the delegate that the specified permission has been requested.
+
+   - parameter permissionSet: The permission set containing the requested permission.
+   - parameter permission:    The requested permission.
+   */
+  func permissionSet(_ permissionSet: PermissionSet, didRequestPermission permission: Permission) {}
+
+  /**
+   Tells the delegate that the specified permission will be requested.
+
+   - parameter permissionSet: The permission set containing the requested permission.
+   - parameter permission:    The requested permission.
+   */
+  func permissionSet(_ permissionSet: PermissionSet, willRequestPermission permission: Permission) {}
 }

@@ -35,7 +35,8 @@ internal extension Permission {
         case .authorized:          return .authorized
         case .restricted, .denied: return .denied
         case .notDetermined:       return .notDetermined
-        }
+        @unknown default:          return .notDetermined
+      }
     }
     
     func requestContacts(_ callback: @escaping Callback) {
