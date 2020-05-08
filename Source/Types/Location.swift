@@ -22,7 +22,6 @@
 // SOFTWARE.
 //
 
-#if PERMISSION_LOCATION
 import CoreLocation
 
 let LocationManager = CLLocationManager()
@@ -58,4 +57,3 @@ extension CLLocationManager {
         }
     }
 }
-#endif

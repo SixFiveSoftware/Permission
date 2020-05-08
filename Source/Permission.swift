@@ -32,13 +32,11 @@ open class Permission: NSObject {
     public static let contacts = Permission(type: .contacts)
     #endif
 
-    #if PERMISSION_LOCATION
     /// The permission to access the user's location when the app is in background.
     public static let locationAlways = Permission(type: .locationAlways)
 
     /// The permission to access the user's location when the app is in use.
     public static let locationWhenInUse = Permission(type: .locationWhenInUse)
-    #endif
 
     #if PERMISSION_MICROPHONE
     /// The permission to access the microphone.
@@ -121,10 +119,8 @@ open class Permission: NSObject {
         case .contacts: return statusContacts
         #endif
 
-        #if PERMISSION_LOCATION
         case .locationAlways: return statusLocationAlways
         case .locationWhenInUse: return statusLocationWhenInUse
-        #endif
 
         #if PERMISSION_NOTIFICATIONS
         case .notifications: return statusNotifications
@@ -241,10 +237,8 @@ open class Permission: NSObject {
         case .contacts: requestContacts(callback)
         #endif
 
-        #if PERMISSION_LOCATION
         case .locationAlways: requestLocationAlways(callback)
         case .locationWhenInUse: requestLocationWhenInUse(callback)
-        #endif
 
         #if PERMISSION_NOTIFICATIONS
         case .notifications: requestNotifications(callback)

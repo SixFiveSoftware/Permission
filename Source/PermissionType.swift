@@ -27,10 +27,8 @@ public enum PermissionType {
     case contacts
     #endif
 
-    #if PERMISSION_LOCATION
     case locationAlways
     case locationWhenInUse
-    #endif
 
     #if PERMISSION_NOTIFICATIONS
     case notifications(UNAuthorizationOptions)
@@ -86,10 +84,8 @@ extension PermissionType: CustomStringConvertible {
         case .contacts: return "Contacts"
         #endif
 
-        #if PERMISSION_LOCATION
         case .locationAlways: return "Location"
         case .locationWhenInUse: return "Location"
-        #endif
 
         #if PERMISSION_NOTIFICATIONS
         case .notifications: return "Notifications"
