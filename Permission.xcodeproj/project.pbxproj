@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B4BFD962465BAB6000CAAB8 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BFD952465BAB6000CAAB8 /* Package.swift */; };
 		3D42A7DB1D5F66B300236ABA /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D42A7DA1D5F66B300236ABA /* SpeechRecognizer.swift */; };
 		3DC217D31D6EFD4A00600DFE /* MediaLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC217D21D6EFD4A00600DFE /* MediaLibrary.swift */; };
 		3F21DC7E1E30E0B900B3EF65 /* Siri.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21DC7C1E30B6DB00B3EF65 /* Siri.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B4BFD952465BAB6000CAAB8 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		3D42A7DA1D5F66B300236ABA /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		3DC217D21D6EFD4A00600DFE /* MediaLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibrary.swift; sourceTree = "<group>"; };
 		3F21DC7C1E30B6DB00B3EF65 /* Siri.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Siri.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				84742781230896D2007A7922 /* PermissionSet.swift */,
 				6D491E771C9CA90B00611006 /* PermissionStatus.swift */,
 				8474278323089751007A7922 /* PermissionType.swift */,
+				3B4BFD952465BAB6000CAAB8 /* Package.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				6DF9C2B41C8F4F54000710C1 /* LocationWhenInUse.swift in Sources */,
 				6DA8B4B01BFB80E9007A94FC /* PermissionButton.swift in Sources */,
 				6DF9C2C01C8F5003000710C1 /* Events.swift in Sources */,
+				3B4BFD962465BAB6000CAAB8 /* Package.swift in Sources */,
 				6DF9C2B61C8F4F69000710C1 /* Reminders.swift in Sources */,
 				6DF9C2AF1C8F4F2A000710C1 /* Contacts.swift in Sources */,
 				8474278423089751007A7922 /* PermissionType.swift in Sources */,
